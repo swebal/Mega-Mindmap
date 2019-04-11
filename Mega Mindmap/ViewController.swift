@@ -45,7 +45,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, MegaViewDelegate {
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
         if fromSelectedView != nil {
-            fromSelectedView?.deselect()
+            fromSelectedView?.selected = false
             fromSelectedView = nil
         } else {
             let mview = MegaView(at: gesture.location(in: contentView))
@@ -60,11 +60,12 @@ class ViewController: UIViewController, UIScrollViewDelegate, MegaViewDelegate {
         // Show alert view with text input and edit views label
         let textInput = UIAlertController(title: "Edit text", message: nil, preferredStyle: .alert)
         textInput.addTextField { (textField) in
-            textField.placeholder = view.label.text
+            textField.text = view.label.text
         }
         textInput.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) in
             let textField = textInput.textFields![0] as UITextField
             view.label.text = textField.text
+            view.update()
         }))
         self.present(textInput, animated: true, completion: nil)
     }
@@ -80,11 +81,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, MegaViewDelegate {
                 fromSelectedView?.lines.append(line)
                 view.lines.append(line)
                 line.updateFrame()
-                fromSelectedView?.deselect()
+                fromSelectedView?.selected = false
             }
             fromSelectedView = nil
         } else {
-            view.select()
+            view.selected = true
             fromSelectedView = view
         }
     }

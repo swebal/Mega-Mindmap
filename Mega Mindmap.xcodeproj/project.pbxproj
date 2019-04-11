@@ -14,6 +14,8 @@
 		61667959225E7F2000EE1BD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61667957225E7F2000EE1BD7 /* LaunchScreen.storyboard */; };
 		61667961225E7F5900EE1BD7 /* MegaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61667960225E7F5900EE1BD7 /* MegaView.swift */; };
 		61667963225E851400EE1BD7 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61667962225E851400EE1BD7 /* LineView.swift */; };
+		6175BA6E225FF9B00074917F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175BA6D225FF9B00074917F /* LaunchViewController.swift */; };
+		6175BA70225FF9D20074917F /* MindmapsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175BA6F225FF9D20074917F /* MindmapsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		6166795A225E7F2000EE1BD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61667960225E7F5900EE1BD7 /* MegaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MegaView.swift; sourceTree = "<group>"; };
 		61667962225E851400EE1BD7 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		6175BA6D225FF9B00074917F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		6175BA6F225FF9D20074917F /* MindmapsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindmapsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				61667957225E7F2000EE1BD7 /* LaunchScreen.storyboard */,
 				61667962225E851400EE1BD7 /* LineView.swift */,
 				61667952225E7F1F00EE1BD7 /* Main.storyboard */,
+				6175BA6D225FF9B00074917F /* LaunchViewController.swift */,
+				6175BA6F225FF9D20074917F /* MindmapsTableViewController.swift */,
 				61667960225E7F5900EE1BD7 /* MegaView.swift */,
 				61667950225E7F1F00EE1BD7 /* ViewController.swift */,
 			);
@@ -141,7 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6175BA70225FF9D20074917F /* MindmapsTableViewController.swift in Sources */,
 				61667963225E851400EE1BD7 /* LineView.swift in Sources */,
+				6175BA6E225FF9B00074917F /* LaunchViewController.swift in Sources */,
 				61667951225E7F1F00EE1BD7 /* ViewController.swift in Sources */,
 				6166794F225E7F1F00EE1BD7 /* AppDelegate.swift in Sources */,
 				61667961225E7F5900EE1BD7 /* MegaView.swift in Sources */,

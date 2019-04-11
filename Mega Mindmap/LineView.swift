@@ -30,15 +30,13 @@ class LineView: UIView {
     
     func updateFrame() {
         self.frame = fromView!.frame.union(toView!.frame)
-            .insetBy(dx: fromView!.frame.size.width/2,
-                     dy: toView!.frame.size.height/2).atLeast(2)
         self.setNeedsDisplay()
     }
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()
         path.lineWidth = 2.0
-        UIColor.black.setStroke()
+        fromView?.viewColor?.setStroke()
         let origin = fromView!.center - self.frame.origin
         let destination = toView!.center - self.frame.origin
         let halfOfViewWidth = (destination.x - origin.x) * 0.5

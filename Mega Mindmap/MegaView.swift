@@ -18,7 +18,31 @@ class MegaView: UIView {
     var delegate: MegaViewDelegate?
     var lines = [LineView]()
     var label = UILabel()
-    private var viewColor: UIColor?
+    var viewColor: UIColor?
+    
+    // MARK: Select
+    
+    private var _selected: Bool = false
+    
+    // Public variable (read-only)
+    var selected: Bool {
+        get {
+            return _selected
+        }
+        set (state) {
+            if _selected != state {
+                _selected = state
+                setNeedsDisplay()
+            }
+        }
+    }
+    
+    // Set minimum and maximum width (minimum width == height)
+    
+    let viewheight: CGFloat = 80
+    let minWidth: CGFloat = 80
+    let maxWidth: CGFloat = 240
+    let padding: CGFloat = 16
     
     // MARK: Init
     
@@ -32,10 +56,11 @@ class MegaView: UIView {
         label.frame = self.bounds
         label.text = "Text"
         label.textAlignment = NSTextAlignment.center
-        self.addSubview(label)
-        self.layer.cornerRadius = size/2
-        self.clipsToBounds = true
-        self.backgroundColor = UIColor.random()
+        label.numberOfLines = 2
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        addSubview(label)
+        viewColor = UIColor.random()
+        backgroundColor = UIColor.clear
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(gesture:)))
         doubleTap.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTap)
@@ -43,6 +68,7 @@ class MegaView: UIView {
         tap.require(toFail: doubleTap)
         addGestureRecognizer(tap)
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPan(gesture:))))
+        update()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,18 +92,9 @@ class MegaView: UIView {
             for line in lines {
                 line.updateFrame()
             }
+        } else if gesture.state == .began {
+            superview?.bringSubviewToFront(self)
         }
-    }
-    
-    // MARK: Select
-    
-    func select() {
-        viewColor = self.backgroundColor
-        self.backgroundColor = UIColor.yellow
-    }
-    
-    func deselect() {
-        self.backgroundColor = viewColor
     }
     
     // MARK: Delete
@@ -87,6 +104,22 @@ class MegaView: UIView {
             line.removeFromSuperview()
         }
         self.removeFromSuperview()
+    }
+    
+    func update() {
+        // Calculate frame for text and call draw
+        let textSize = label.sizeThatFits(CGSize(width: maxWidth-2*padding, height: viewheight-2*padding))
+        let width = max(minWidth, textSize.width + 2 * padding)
+        label.frame = CGRect(x: padding, y: padding, width: width-2*padding, height: viewheight-2*padding)
+        frame = CGRect(x: center.x-width/2, y: frame.origin.y, width: width, height: viewheight)
+        setNeedsDisplay()
+    }
+    
+    override func draw(_ rect: CGRect) {
+        // TODO: Draw rounded corner rect behind label
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.bottomLeft, .topRight], cornerRadii: CGSize(width: viewheight/2, height: viewheight/2))
+        _selected ? UIColor.yellow.setFill() : viewColor?.setFill()
+        path.fill()
     }
 }
 
